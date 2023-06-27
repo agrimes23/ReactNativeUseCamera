@@ -80,15 +80,15 @@ const HomeScreen = () => {
     return (
         <View>
             <View style={styles.view}>
-              <Text style={styles.text} accessibilityLabel="Title: Vaccination Card Page. You can add vaccination card from your phone's photo gallery, or take a picture with your camera and submit" >Vaccination Card Page</Text>           
+              <Text style={styles.text} accessibilityRole="header" accessibilityLabel="Title: Vaccination Card Page. You can add vaccination card from your phone's photo gallery, or take a picture with your camera and submit" >Vaccination Card Page</Text>           
             </View>
 
             {/* click to take pic of front & back */}
             {/* front of card */}
             <View style={styles.view}>
-              <Text style={styles.text}>Front</Text>
-              {frontImage ? (<Image style={styles.image} source={{ uri: frontImage }} accessibilityLabel="Front of vaccination card" />) : (<Image style={styles.image} source={require('../assets/nopicture.png')} accessibilityLabel="Blank Image" />)}
-              <TouchableOpacity style={styles.button} onPress={() => addImage("front")} accessibilityLabel="Add Front of Vaccination Card Image" >
+              <Text style={styles.text} accessibilityLabel="Front" accessibilityRole="header">Front</Text>
+              {frontImage ? (<Image style={styles.image} source={{ uri: frontImage }} accessible={true} accessibilityLabel="Front of vaccination card" accessibilityRole="image" />) : (<Image style={styles.image} source={require('../assets/nopicture.png')} accessible={true} accessibilityLabel="Blank Image" accessibilityRole="image" />)}
+              <TouchableOpacity style={styles.button} onPress={() => addImage("front")} accessible={true} accessibilityLabel="Add Front of Vaccination Card Image" accessibilityRole="button">
                 <Text>Add Front of Card Image</Text>
               </TouchableOpacity>
             </View>
@@ -96,9 +96,9 @@ const HomeScreen = () => {
 
             {/* back of card*/}
             <View style={styles.view}>
-              <Text style={styles.text}>Back</Text>
-              {backImage ? (<Image style={styles.image} source={{ uri: backImage }} accessibilityLabel="Back of vaccination card" />) : (<Image style={styles.image} source={require('../assets/nopicture.png')} accessibilityLabel="Blank Image" />)}
-              <TouchableOpacity style={styles.button} onPress={() => addImage("back")} accessibilityLabel="Add Back of Vaccination Card Image">
+              <Text style={styles.text} accessibilityRole="header" accessibilityLabel="Back">Back</Text>
+              {backImage ? (<Image style={styles.image} source={{ uri: backImage }} accessible={true} accessibilityLabel="Back of vaccination card" accessibilityRole="image" />) : (<Image style={styles.image} source={require('../assets/nopicture.png')} accessible={true} accessibilityLabel="Blank Image" accessibilityRole="image" />)}
+              <TouchableOpacity style={styles.button} onPress={() => addImage("back")} accessible={true} accessibilityLabel="Add Back of Vaccination Card Image" accessibilityRole="button">
                 <Text>Add Back of Card Image</Text>
               </TouchableOpacity>
             </View>
@@ -107,15 +107,15 @@ const HomeScreen = () => {
             <Modal visible={openModal} transparent >
               <View style={styles.bgModalOne}></View>
             </Modal>
-            <Modal visible={openModal} style={styles.modalProp} transparent animationType="slide" accessibilityLabel="Bottom of Screen Pop Up: Choose How you want to Upload Photo">
+            <Modal visible={openModal} style={styles.modalProp} transparent animationType="slide" accessibilityLabel="Bottom of Screen Pop Up: Choose How you want to Upload Photo" accessibilityRole="menu">
               <View style={styles.bgModalTwo}>
-                <TouchableOpacity onPress={() => openCamera()} accessibilityLabel="Use Camera" >
+                <TouchableOpacity onPress={() => openCamera()} accessible={true} accessibilityLabel="Use Camera" accessibilityRole="menuitem">
                   <Text style={styles.modalText}>Use Camera</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => getImageFromLibrary()} accessibilityLabel="Select Image from Phone Album">
+                <TouchableOpacity onPress={() => getImageFromLibrary()} accessible={true} accessibilityLabel="Select Image from Phone Album" accessibilityRole="menuitem">
                   <Text style={styles.modalText}>Select Image from Phone Album</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setOpenModal(false)} accessibilityLabel="Back to Vaccination Card Page">
+                <TouchableOpacity onPress={() => setOpenModal(false)} accessible={true} accessibilityLabel="Back to Vaccination Card Page" accessibilityRole="menuitem">
                   <Text style={styles.modalText}>Back</Text>
                 </TouchableOpacity>
               </View>
