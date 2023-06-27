@@ -11,6 +11,10 @@ import ImagePicker, { launchCamera, CameraOptions, launchImageLibrary, ImageLibr
 
 // documentation used: https://github.com/react-native-image-picker/react-native-image-picker
 
+// TODO: 
+// // Make elements ADA accessible, using accessible={true}, accessibilityLabel={label}, accessibilityTraits={"button"} <- Touchable Opacity, accessibilityRole={"image"}, label on buttons
+// // Upgrade css stylesheet to NativeWind CSS
+
 const HomeScreen = () => {
 
   // for front and back camera image feature:
@@ -27,7 +31,7 @@ const HomeScreen = () => {
           includeBase64: false, // might need to set it to true to save image to backend?
           saveToPhotos: true, // only saves photos to user's phone gallery
         };
-        
+        setOpenModal(false)
         const result = await launchCamera(options);
         console.log(result)
         if (result.assets && result.assets.length > 0 && cardSide === "front") {
@@ -39,7 +43,7 @@ const HomeScreen = () => {
       } catch (error) {
         console.log('Error opening camera:', error);
       }
-      setOpenModal(false)
+
     };
   
     // choose image from phone's photo gallery
@@ -50,7 +54,8 @@ const HomeScreen = () => {
           mediaType: 'photo',
           includeBase64: false,
         }
-        
+
+        setOpenModal(false)
         const result = await launchImageLibrary(options)
         console.log(result)
         if (result.assets && result.assets.length > 0 && cardSide === "front") {
@@ -62,7 +67,7 @@ const HomeScreen = () => {
       }  catch (error) {
         console.log('Error in selecting image from album:', error);
       }
-      setOpenModal(false)
+      
     }
 
     // click either button to add an image. This will prompt the user to choose openCamera() and getImageFromLibrary() via modal
@@ -75,15 +80,15 @@ const HomeScreen = () => {
     return (
         <View>
             <View style={styles.view}>
-              <Text style={styles.text}>Vaccination Card Page</Text>           
+              <Text style={styles.text} accessibilityLabel="Title: Vaccination Card Page. You can add vaccination card from your phone's photo gallery, or take a picture with your camera and submit" >Vaccination Card Page</Text>           
             </View>
 
             {/* click to take pic of front & back */}
             {/* front of card */}
             <View style={styles.view}>
               <Text style={styles.text}>Front</Text>
-              {frontImage ? (<Image style={styles.image} source={{ uri: frontImage }} />) : (<Image style={styles.image} source={require('../assets/nopicture.png')} />)}
-              <TouchableOpacity style={styles.button} onPress={() => addImage("front")}>
+              {frontImage ? (<Image style={styles.image} source={{ uri: frontImage }} accessibilityLabel="Front of vaccination card" />) : (<Image style={styles.image} source={require('../assets/nopicture.png')} accessibilityLabel="Blank Image" />)}
+              <TouchableOpacity style={styles.button} onPress={() => addImage("front")} accessibilityLabel="Add Front of Vaccination Card Image" >
                 <Text>Add Front of Card Image</Text>
               </TouchableOpacity>
             </View>
@@ -92,8 +97,8 @@ const HomeScreen = () => {
             {/* back of card*/}
             <View style={styles.view}>
               <Text style={styles.text}>Back</Text>
-              {backImage ? (<Image style={styles.image} source={{ uri: backImage }} />) : (<Image style={styles.image} source={require('../assets/nopicture.png')} />)}
-              <TouchableOpacity style={styles.button} onPress={() => addImage("back")}>
+              {backImage ? (<Image style={styles.image} source={{ uri: backImage }} accessibilityLabel="Back of vaccination card" />) : (<Image style={styles.image} source={require('../assets/nopicture.png')} accessibilityLabel="Blank Image" />)}
+              <TouchableOpacity style={styles.button} onPress={() => addImage("back")} accessibilityLabel="Add Back of Vaccination Card Image">
                 <Text>Add Back of Card Image</Text>
               </TouchableOpacity>
             </View>
@@ -102,15 +107,15 @@ const HomeScreen = () => {
             <Modal visible={openModal} transparent >
               <View style={styles.bgModalOne}></View>
             </Modal>
-            <Modal visible={openModal} style={styles.modalProp} transparent animationType="slide">
+            <Modal visible={openModal} style={styles.modalProp} transparent animationType="slide" accessibilityLabel="Bottom of Screen Pop Up: Choose How you want to Upload Photo">
               <View style={styles.bgModalTwo}>
-                <TouchableOpacity onPress={() => openCamera()}>
+                <TouchableOpacity onPress={() => openCamera()} accessibilityLabel="Use Camera" >
                   <Text style={styles.modalText}>Use Camera</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => getImageFromLibrary()}>
+                <TouchableOpacity onPress={() => getImageFromLibrary()} accessibilityLabel="Select Image from Phone Album">
                   <Text style={styles.modalText}>Select Image from Phone Album</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setOpenModal(false)}>
+                <TouchableOpacity onPress={() => setOpenModal(false)} accessibilityLabel="Back to Vaccination Card Page">
                   <Text style={styles.modalText}>Back</Text>
                 </TouchableOpacity>
               </View>
