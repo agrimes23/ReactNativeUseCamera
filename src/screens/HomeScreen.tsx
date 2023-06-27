@@ -7,26 +7,27 @@ import {
   TouchableOpacity,
   StyleSheet,
   ImageBackground,
-  Image
+  Image,
+  Modal
 } from 'react-native';
 import ImagePicker, { launchCamera, CameraOptions, launchImageLibrary, ImageLibraryOptions } from 'react-native-image-picker';
 
 // documentation used: https://github.com/react-native-image-picker/react-native-image-picker
 // TODO: 
-// // create a popup module that asks user if they want to use camera or upload image from gallery
+// // create a popup modal that asks user if they want to use camera or upload image from gallery
 // // 
 
 const HomeScreen = () => {
 
-  const [imageFile, setImageFile] = useState<string | undefined>(undefined);
-
-  // for front and back feature:
+  // for front and back camera image feature:
   const [frontImage, setFrontImage] = useState<string | undefined>(undefined);
   const [backImage, setBackImage] = useState<string | undefined>(undefined);
+  const [openModal, setOpenModal] = useState<boolean>(false)
+  const [cardSide, setCardSide] = useState<string>("")
 
 
   // take a picture using phone's camera
-    const openCamera = async (cardSide: string) => {
+    const openCamera = async () => {
       try {
         const options: CameraOptions = {
           mediaType: 'photo',
@@ -46,6 +47,7 @@ const HomeScreen = () => {
       } catch (error) {
         console.log('Error opening camera:', error);
       }
+      setOpenModal(false)
     };
   
     // choose image from phone's photo gallery
@@ -58,25 +60,28 @@ const HomeScreen = () => {
         }
         
         const result = await launchImageLibrary(options)
-        if (result.assets && result.assets.length > 0) {
-          setImageFile(result.assets[0].uri)
+        if (result.assets && result.assets.length > 0 && cardSide === "front") {
+          setFrontImage(result.assets[0].uri)
+        } else if(result.assets && result.assets.length > 0 && cardSide === "back") {
+          setBackImage(result.assets[0].uri)
         }
 
       }  catch (error) {
         console.log('Error in selecting image from album:', error);
       }
+      setOpenModal(false)
+    }
+
+    const addImage = (cardSide: string) => {
+      setOpenModal(true)
+      setCardSide(cardSide)
     }
 
 
     return (
         <View>
             <View style={styles.view}>
-              <Text style={styles.text}>Vaccination Card Page</Text>
-            {/* if wanted to get image from album */}
-            {/* <TouchableOpacity style={styles.button} onPress={getImageFromLibrary}>
-                <Text>Get Image from Album</Text>
-            </TouchableOpacity> */}
-            
+              <Text style={styles.text}>Vaccination Card Page</Text>           
             </View>
 
             {/* most likely scenario: click to take pic of front & back */}
@@ -84,7 +89,7 @@ const HomeScreen = () => {
             <View style={styles.view}>
               <Text style={styles.text}>Front</Text>
               {frontImage ? (<Image style={styles.image} source={{ uri: frontImage }} />) : (<Image style={styles.image} source={require('../assets/nopicture.png')} />)}
-              <TouchableOpacity style={styles.button} onPress={() => openCamera("front")}>
+              <TouchableOpacity style={styles.button} onPress={() => addImage("front")}>
                 <Text>Add Front of Card Image</Text>
               </TouchableOpacity>
             </View>
@@ -94,16 +99,35 @@ const HomeScreen = () => {
             <View style={styles.view}>
               <Text style={styles.text}>Back</Text>
               {backImage ? (<Image style={styles.image} source={{ uri: backImage }} />) : (<Image style={styles.image} source={require('../assets/nopicture.png')} />)}
-              <TouchableOpacity style={styles.button} onPress={() => openCamera("back")}>
+              <TouchableOpacity style={styles.button} onPress={() => addImage("back")}>
                 <Text>Add Back of Card Image</Text>
               </TouchableOpacity>
             </View>
             
-            {/* module pop-up */}
+            {/* modal pop-up */}
             {/* initially set to hidden; need to have useState for hidden/visible */}
             {/* need to set z-index to number above 0 */}
 
-            {/* <View style={styles.view}>
+            <Modal visible={openModal} transparent >
+              <View style={styles.bgModalOne}></View>
+            </Modal>
+            <Modal visible={openModal} style={styles.modalProp} transparent animationType="slide">
+              <View style={styles.bgModalTwo}>
+                <TouchableOpacity onPress={() => openCamera()}>
+                  <Text style={styles.modalText}>Use Camera</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => getImageFromLibrary()}>
+                  <Text style={styles.modalText}>Select Image from Phone Album</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setOpenModal(false)}>
+                  <Text style={styles.modalText}>Back</Text>
+                </TouchableOpacity>
+              </View>
+            </Modal>
+
+
+{/* 
+            <View>
               <Text style={styles.text}>Back</Text>
               {backImage ? (<Image style={styles.image} source={{ uri: backImage }} />) : (<Image style={styles.image} source={require('../assets/nopicture.png')} />)}
               <TouchableOpacity style={styles.button} onPress={() => openCamera("back")}>
@@ -116,7 +140,8 @@ const HomeScreen = () => {
     )
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create(
+  {
     button: {
       display: 'flex',
       flexDirection: 'column',
@@ -148,7 +173,46 @@ const styles = StyleSheet.create({
       fontSize: 30,
       textAlign: 'center',
       marginTop: 25,
+    },
+    hidden: {
+      display: 'none'
+    },
+    show: {
+      display: 'flex',
+      zIndex: 2,
+      margin: 'auto',
+      width: 300,
+      height: 300,
+    },
+    modalText: {
+      marginTop: 15,
+      fontSize: 20,
+      textAlign: 'center',
+      
+    },
+    bgModalOne: {
+      height: '100%',
+      width: '100%',
+      backgroundColor: 'rgba(0,0,0,0.7)'
+    },
+    modalProp: {
+      display: 'flex',
+      flexDirection: 'row',
+      height: "100%",
+      justifyContent: 'flex-end',
+    },
+    bgModalTwo: {
+      display: 'flex',
+      position: 'absolute',
+      bottom: 0,
+      paddingTop: 40,
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 20,
+      height: '30%',
+      width: '100%',
+      backgroundColor: 'rgba(255,255,255, 1)'
     }
+
   });
 
 export default HomeScreen;
