@@ -12,6 +12,9 @@ import {
 import ImagePicker, { launchCamera, CameraOptions, launchImageLibrary, ImageLibraryOptions } from 'react-native-image-picker';
 
 // documentation used: https://github.com/react-native-image-picker/react-native-image-picker
+// TODO: 
+// // create a popup module that asks user if they want to use camera or upload image from gallery
+// // 
 
 const HomeScreen = () => {
 
@@ -28,15 +31,17 @@ const HomeScreen = () => {
         const options: CameraOptions = {
           mediaType: 'photo',
           includeBase64: false, // might need to set it to true to save image to backend?
+          saveToPhotos: true,
         };
         
         const result = await launchCamera(options);
-
+        console.log(result)
         if (result.assets && result.assets.length > 0 && cardSide === "front") {
           setFrontImage(result.assets[0].uri)
         } else if(result.assets && result.assets.length > 0 && cardSide === "back") {
           setBackImage(result.assets[0].uri)
         }
+        
         
       } catch (error) {
         console.log('Error opening camera:', error);
@@ -61,6 +66,7 @@ const HomeScreen = () => {
         console.log('Error in selecting image from album:', error);
       }
     }
+
 
     return (
         <View>
@@ -92,6 +98,18 @@ const HomeScreen = () => {
                 <Text>Add Back of Card Image</Text>
               </TouchableOpacity>
             </View>
+            
+            {/* module pop-up */}
+            {/* initially set to hidden; need to have useState for hidden/visible */}
+            {/* need to set z-index to number above 0 */}
+
+            {/* <View style={styles.view}>
+              <Text style={styles.text}>Back</Text>
+              {backImage ? (<Image style={styles.image} source={{ uri: backImage }} />) : (<Image style={styles.image} source={require('../assets/nopicture.png')} />)}
+              <TouchableOpacity style={styles.button} onPress={() => openCamera("back")}>
+                <Text>Add Back of Card Image</Text>
+              </TouchableOpacity>
+            </View> */}
             
         </View>
 
