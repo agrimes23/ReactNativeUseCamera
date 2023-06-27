@@ -25,7 +25,6 @@ const HomeScreen = () => {
   const [openModal, setOpenModal] = useState<boolean>(false)
   const [cardSide, setCardSide] = useState<string>("")
 
-
   // take a picture using phone's camera
     const openCamera = async () => {
       try {
@@ -72,6 +71,7 @@ const HomeScreen = () => {
       setOpenModal(false)
     }
 
+    // click either button to add an image. This will prompt the user to choose openCamera() and getImageFromLibrary() via modal
     const addImage = (cardSide: string) => {
       setOpenModal(true)
       setCardSide(cardSide)
@@ -84,8 +84,8 @@ const HomeScreen = () => {
               <Text style={styles.text}>Vaccination Card Page</Text>           
             </View>
 
-            {/* most likely scenario: click to take pic of front & back */}
-            {/* front */}
+            {/* click to take pic of front & back */}
+            {/* front of card */}
             <View style={styles.view}>
               <Text style={styles.text}>Front</Text>
               {frontImage ? (<Image style={styles.image} source={{ uri: frontImage }} />) : (<Image style={styles.image} source={require('../assets/nopicture.png')} />)}
@@ -95,7 +95,7 @@ const HomeScreen = () => {
             </View>
             
 
-            {/* back */}
+            {/* back of card*/}
             <View style={styles.view}>
               <Text style={styles.text}>Back</Text>
               {backImage ? (<Image style={styles.image} source={{ uri: backImage }} />) : (<Image style={styles.image} source={require('../assets/nopicture.png')} />)}
@@ -105,8 +105,6 @@ const HomeScreen = () => {
             </View>
             
             {/* modal pop-up */}
-            {/* initially set to hidden; need to have useState for hidden/visible */}
-            {/* need to set z-index to number above 0 */}
 
             <Modal visible={openModal} transparent >
               <View style={styles.bgModalOne}></View>
@@ -124,16 +122,6 @@ const HomeScreen = () => {
                 </TouchableOpacity>
               </View>
             </Modal>
-
-
-{/* 
-            <View>
-              <Text style={styles.text}>Back</Text>
-              {backImage ? (<Image style={styles.image} source={{ uri: backImage }} />) : (<Image style={styles.image} source={require('../assets/nopicture.png')} />)}
-              <TouchableOpacity style={styles.button} onPress={() => openCamera("back")}>
-                <Text>Add Back of Card Image</Text>
-              </TouchableOpacity>
-            </View> */}
             
         </View>
 
