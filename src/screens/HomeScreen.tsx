@@ -57,7 +57,6 @@ const HomeScreen = () => {
           setImageFile(result.assets[0].uri)
         }
 
-  
       }  catch (error) {
         console.log('Error in selecting image from album:', error);
       }
