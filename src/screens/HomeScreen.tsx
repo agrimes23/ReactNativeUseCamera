@@ -59,6 +59,7 @@ const HomeScreen = () => {
         }
         
         const result = await launchImageLibrary(options)
+        console.log(result)
         if (result.assets && result.assets.length > 0 && cardSide === "front") {
           setFrontImage(result.assets[0].uri)
         } else if(result.assets && result.assets.length > 0 && cardSide === "back") {
@@ -105,7 +106,6 @@ const HomeScreen = () => {
             </View>
             
             {/* modal pop-up */}
-
             <Modal visible={openModal} transparent >
               <View style={styles.bgModalOne}></View>
             </Modal>
