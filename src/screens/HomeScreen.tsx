@@ -89,7 +89,7 @@ const HomeScreen = () => {
               <Text style={styles.text} accessibilityLabel="Front" accessibilityRole="header">Front</Text>
               {frontImage ? (<Image style={styles.image} source={{ uri: frontImage }} accessible={true} accessibilityLabel="Front of vaccination card" accessibilityRole="image" />) : (<Image style={styles.image} source={require('../assets/nopicture.png')} accessible={true} accessibilityLabel="Blank Image" accessibilityRole="image" />)}
               <TouchableOpacity style={styles.button} onPress={() => addImage("front")} accessible={true} accessibilityLabel="Add Front of Vaccination Card Image" accessibilityRole="button">
-                <Text>Add Front of Card Image</Text>
+                <Text style={styles.buttonText}>Add Front of Card Image</Text>
               </TouchableOpacity>
             </View>
             
@@ -99,7 +99,7 @@ const HomeScreen = () => {
               <Text style={styles.text} accessibilityRole="header" accessibilityLabel="Back">Back</Text>
               {backImage ? (<Image style={styles.image} source={{ uri: backImage }} accessible={true} accessibilityLabel="Back of vaccination card" accessibilityRole="image" />) : (<Image style={styles.image} source={require('../assets/nopicture.png')} accessible={true} accessibilityLabel="Blank Image" accessibilityRole="image" />)}
               <TouchableOpacity style={styles.button} onPress={() => addImage("back")} accessible={true} accessibilityLabel="Add Back of Vaccination Card Image" accessibilityRole="button">
-                <Text>Add Back of Card Image</Text>
+                <Text style={styles.buttonText}>Add Back of Card Image</Text>
               </TouchableOpacity>
             </View>
             
@@ -132,12 +132,13 @@ const styles = StyleSheet.create(
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      backgroundColor: '#5bc7aa',
+      backgroundColor: '#82faf6',
       padding: 10,
       borderColor: "#000000",
       borderWidth: 1,
       marginTop: 10,
       width: 300,
+      borderRadius: 4
     },
     view: {
       display: 'flex',
@@ -159,6 +160,14 @@ const styles = StyleSheet.create(
       fontSize: 30,
       textAlign: 'center',
       marginTop: 25,
+      color: '#000000',
+    },
+    buttonText: {
+      color: '#000000',
+      textAlign: 'center',
+      fontSize: 20,
+      paddingTop: 5,
+      paddingBottom: 5,
     },
     hidden: {
       display: 'none'
@@ -174,7 +183,7 @@ const styles = StyleSheet.create(
       marginTop: 15,
       fontSize: 20,
       textAlign: 'center',
-      
+      color: '#000000',
     },
     bgModalOne: {
       height: '100%',
