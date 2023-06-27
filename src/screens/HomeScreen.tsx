@@ -12,10 +12,6 @@ import {
 import ImagePicker, { launchCamera, CameraOptions, launchImageLibrary, ImageLibraryOptions } from 'react-native-image-picker';
 
 // documentation used: https://github.com/react-native-image-picker/react-native-image-picker
-// TODO:
-// // How to show front and back photos at the same time
-// // // Maybe use an array of 2 objects? I think there's a special array/list that limits the amount of elements
-// // // 
 
 const HomeScreen = () => {
 
