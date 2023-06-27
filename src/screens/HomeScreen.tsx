@@ -1,21 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
   Text,
   View,
   TouchableOpacity,
   StyleSheet,
-  ImageBackground,
   Image,
   Modal
 } from 'react-native';
 import ImagePicker, { launchCamera, CameraOptions, launchImageLibrary, ImageLibraryOptions } from 'react-native-image-picker';
 
 // documentation used: https://github.com/react-native-image-picker/react-native-image-picker
-// TODO: 
-// // create a popup modal that asks user if they want to use camera or upload image from gallery
-// // 
 
 const HomeScreen = () => {
 
@@ -31,7 +25,7 @@ const HomeScreen = () => {
         const options: CameraOptions = {
           mediaType: 'photo',
           includeBase64: false, // might need to set it to true to save image to backend?
-          saveToPhotos: true,
+          saveToPhotos: true, // only saves photos to user's phone gallery
         };
         
         const result = await launchCamera(options);
@@ -41,7 +35,6 @@ const HomeScreen = () => {
         } else if(result.assets && result.assets.length > 0 && cardSide === "back") {
           setBackImage(result.assets[0].uri)
         }
-        
         
       } catch (error) {
         console.log('Error opening camera:', error);
