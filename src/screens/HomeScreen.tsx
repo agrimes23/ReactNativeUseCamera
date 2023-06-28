@@ -76,25 +76,16 @@ const HomeScreen = () => {
       setCardSide(cardSide)
     }
 
-
-    // text: {
-    //   display: 'flex',
-    //   fontSize: 30,
-    //   textAlign: 'center',
-    //   marginTop: 25,
-    //   color: '#000000',
-    // },
-
     return (
         <View>
             <View style={styles.view}>
-              <Text className="text-red-700" accessibilityRole="header" accessibilityLabel="Title: Vaccination Card Page. You can add vaccination card from your phone's photo gallery, or take a picture with your camera and submit" >Vaccination Card Page</Text>           
+              <Text className="flex text-3xl text-black m-5" accessibilityRole="header" accessibilityLabel="Title: Vaccination Card Page. You can add vaccination card from your phone's photo gallery, or take a picture with your camera and submit" >Vaccination Card Page</Text>           
             </View>
 
             {/* click to take pic of front & back */}
             {/* front of card */}
             <View style={styles.view}>
-              <Text style={styles.text} accessibilityLabel="Front" accessibilityRole="header">Front</Text>
+              <Text className="flex text-2xl text-black m-3" accessibilityLabel="Front" accessibilityRole="header">Front</Text>
               {frontImage ? (<Image style={styles.image} source={{ uri: frontImage }} accessible={true} accessibilityLabel="Front of vaccination card" accessibilityRole="image" />) : (<Image style={styles.image} source={require('../../assets/nopicture.png')} accessible={true} accessibilityLabel="Blank Image" accessibilityRole="image" />)}
               <TouchableOpacity style={styles.button} onPress={() => addImage("front")} accessible={true} accessibilityLabel="Add Front of Vaccination Card Image" accessibilityRole="button">
                 <Text style={styles.buttonText}>Add Front of Card Image</Text>
@@ -104,7 +95,7 @@ const HomeScreen = () => {
 
             {/* back of card*/}
             <View style={styles.view}>
-              <Text style={styles.text} accessibilityRole="header" accessibilityLabel="Back">Back</Text>
+              <Text className="flex text-2xl text-black m-3" accessibilityRole="header" accessibilityLabel="Back">Back</Text>
               {backImage ? (<Image style={styles.image} source={{ uri: backImage }} accessible={true} accessibilityLabel="Back of vaccination card" accessibilityRole="image" />) : (<Image style={styles.image} source={require('../../assets/nopicture.png')} accessible={true} accessibilityLabel="Blank Image" accessibilityRole="image" />)}
               <TouchableOpacity style={styles.button} onPress={() => addImage("back")} accessible={true} accessibilityLabel="Add Back of Vaccination Card Image" accessibilityRole="button">
                 <Text style={styles.buttonText}>Add Back of Card Image</Text>
