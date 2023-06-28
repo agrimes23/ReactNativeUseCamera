@@ -3,7 +3,6 @@ import {
   Text,
   View,
   TouchableOpacity,
-  StyleSheet,
   Image,
   Modal
 } from 'react-native';
@@ -76,47 +75,58 @@ const HomeScreen = () => {
       setCardSide(cardSide)
     }
 
-
     return (
         <View>
-            <View style={styles.view}>
-              <Text style={styles.text} accessibilityRole="header" accessibilityLabel="Title: Vaccination Card Page. You can add vaccination card from your phone's photo gallery, or take a picture with your camera and submit" >Vaccination Card Page</Text>           
+            <View className="w-screen items-center">
+              <Text className="text-3xl text-black m-5" accessibilityRole="header" accessibilityLabel="Title: Vaccination Card Page. You can add vaccination card from your phone's photo gallery, or take a picture with your camera and submit" >Vaccination Card Page</Text>           
             </View>
 
             {/* click to take pic of front & back */}
-            {/* front of card */}
-            <View style={styles.view}>
-              <Text style={styles.text} accessibilityLabel="Front" accessibilityRole="header">Front</Text>
-              {frontImage ? (<Image style={styles.image} source={{ uri: frontImage }} accessible={true} accessibilityLabel="Front of vaccination card" accessibilityRole="image" />) : (<Image style={styles.image} source={require('../assets/nopicture.png')} accessible={true} accessibilityLabel="Blank Image" accessibilityRole="image" />)}
-              <TouchableOpacity style={styles.button} onPress={() => addImage("front")} accessible={true} accessibilityLabel="Add Front of Vaccination Card Image" accessibilityRole="button">
-                <Text style={styles.buttonText}>Add Front of Card Image</Text>
+            {/* front of card section */}
+            <View className="w-screen items-center">
+              <Text className="text-2xl text-black m-3" accessibilityLabel="Front" accessibilityRole="header">Front</Text>
+              {
+                frontImage ? (
+                  <Image className="mt-2 mx-1 justify-center w-72 h-52" source={{ uri: frontImage }} accessible={true} accessibilityLabel="Front of vaccination card" accessibilityRole="image" />
+                ) : (
+                  <Image className="mt-2 mx-1 justify-center w-72 h-52" source={require('../../assets/nopicture.png')} accessible={true} accessibilityLabel="Blank Image" accessibilityRole="image" />
+                )
+              }
+              <TouchableOpacity className="items-center bg-green-300 p-3 border border-black mt-2 w-72 rounded" onPress={() => addImage("front")} accessible={true} accessibilityLabel="Add Front of Vaccination Card Image" accessibilityRole="button">
+                <Text className="text-center text-xl text-black py-1">Add Front of Card Image</Text>
               </TouchableOpacity>
             </View>
             
 
-            {/* back of card*/}
-            <View style={styles.view}>
-              <Text style={styles.text} accessibilityRole="header" accessibilityLabel="Back">Back</Text>
-              {backImage ? (<Image style={styles.image} source={{ uri: backImage }} accessible={true} accessibilityLabel="Back of vaccination card" accessibilityRole="image" />) : (<Image style={styles.image} source={require('../assets/nopicture.png')} accessible={true} accessibilityLabel="Blank Image" accessibilityRole="image" />)}
-              <TouchableOpacity style={styles.button} onPress={() => addImage("back")} accessible={true} accessibilityLabel="Add Back of Vaccination Card Image" accessibilityRole="button">
-                <Text style={styles.buttonText}>Add Back of Card Image</Text>
+            {/* back of card section */}
+            <View className="w-screen items-center">
+              <Text className="text-2xl text-black m-3" accessibilityRole="header" accessibilityLabel="Back">Back</Text>
+              {
+                backImage ? 
+                (<Image className="mt-2 mx-1 justify-center w-72 h-52" source={{ uri: backImage }} accessible={true} accessibilityLabel="Back of vaccination card" accessibilityRole="image" />
+                ) : 
+                (<Image className="mt-2 mx-1 justify-center w-72 h-52" source={require('../../assets/nopicture.png')} accessible={true} accessibilityLabel="Blank Image" accessibilityRole="image" />
+                )
+              }
+              <TouchableOpacity className="items-center bg-green-300 p-3 border border-black mt-2 w-72 rounded" onPress={() => addImage("back")} accessible={true} accessibilityLabel="Add Back of Vaccination Card Image" accessibilityRole="button">
+                <Text className="text-center text-xl text-black py-1">Add Back of Card Image</Text>
               </TouchableOpacity>
             </View>
             
             {/* modal pop-up */}
             <Modal visible={openModal} transparent >
-              <View style={styles.bgModalOne}></View>
+              <View className="h-screen w-screen bg-opacity-90 bg-black opacity-70"></View>
             </Modal>
-            <Modal visible={openModal} style={styles.modalProp} transparent animationType="slide" accessibilityLabel="Bottom of Screen Pop Up: Choose How you want to Upload Photo" accessibilityRole="menu">
-              <View style={styles.bgModalTwo}>
+            <Modal visible={openModal} className="h-screen justify-end" transparent animationType="slide" accessibilityLabel="Bottom of Screen Pop Up: Choose How you want to Upload Photo" accessibilityRole="menu">
+              <View className="absolute bottom-0 pt-10 rounded-t h-56 w-screen bg-white">
                 <TouchableOpacity onPress={() => openCamera()} accessible={true} accessibilityLabel="Use Camera" accessibilityRole="menuitem">
-                  <Text style={styles.modalText}>Use Camera</Text>
+                  <Text className="mt-3 text-xl text-center text-black">Use Camera</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => getImageFromLibrary()} accessible={true} accessibilityLabel="Select Image from Phone Album" accessibilityRole="menuitem">
-                  <Text style={styles.modalText}>Select Image from Phone Album</Text>
+                  <Text className="mt-3 text-xl text-center text-black">Select Image from Phone Album</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setOpenModal(false)} accessible={true} accessibilityLabel="Back to Vaccination Card Page" accessibilityRole="menuitem">
-                  <Text style={styles.modalText}>Back</Text>
+                  <Text className="mt-3 text-xl text-center text-red-500">Back</Text>
                 </TouchableOpacity>
               </View>
             </Modal>
@@ -125,89 +135,5 @@ const HomeScreen = () => {
 
     )
 }
-
-const styles = StyleSheet.create(
-  {
-    button: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      backgroundColor: '#82faf6',
-      padding: 10,
-      borderColor: "#000000",
-      borderWidth: 1,
-      marginTop: 10,
-      width: 300,
-      borderRadius: 4
-    },
-    view: {
-      display: 'flex',
-      flexDirection: 'column',
-      width: 'auto', 
-      alignItems: 'center'
-    },
-    image: {
-      display: 'flex',
-      marginTop: 10,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      justifyContent: 'center',
-      width: 300,
-      height: 200,
-    },
-    text: {
-      display: 'flex',
-      fontSize: 30,
-      textAlign: 'center',
-      marginTop: 25,
-      color: '#000000',
-    },
-    buttonText: {
-      color: '#000000',
-      textAlign: 'center',
-      fontSize: 20,
-      paddingTop: 5,
-      paddingBottom: 5,
-    },
-    hidden: {
-      display: 'none'
-    },
-    show: {
-      display: 'flex',
-      zIndex: 2,
-      margin: 'auto',
-      width: 300,
-      height: 300,
-    },
-    modalText: {
-      marginTop: 15,
-      fontSize: 20,
-      textAlign: 'center',
-      color: '#000000',
-    },
-    bgModalOne: {
-      height: '100%',
-      width: '100%',
-      backgroundColor: 'rgba(0,0,0,0.7)'
-    },
-    modalProp: {
-      display: 'flex',
-      flexDirection: 'row',
-      height: "100%",
-      justifyContent: 'flex-end',
-    },
-    bgModalTwo: {
-      display: 'flex',
-      position: 'absolute',
-      bottom: 0,
-      paddingTop: 40,
-      borderTopLeftRadius: 20,
-      borderTopRightRadius: 20,
-      height: '30%',
-      width: '100%',
-      backgroundColor: 'rgba(255,255,255, 1)'
-    }
-
-  });
 
 export default HomeScreen;
