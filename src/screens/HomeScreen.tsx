@@ -95,7 +95,7 @@ const HomeScreen = () => {
             {/* front of card */}
             <View style={styles.view}>
               <Text style={styles.text} accessibilityLabel="Front" accessibilityRole="header">Front</Text>
-              {frontImage ? (<Image style={styles.image} source={{ uri: frontImage }} accessible={true} accessibilityLabel="Front of vaccination card" accessibilityRole="image" />) : (<Image style={styles.image} source={require('../assets/nopicture.png')} accessible={true} accessibilityLabel="Blank Image" accessibilityRole="image" />)}
+              {frontImage ? (<Image style={styles.image} source={{ uri: frontImage }} accessible={true} accessibilityLabel="Front of vaccination card" accessibilityRole="image" />) : (<Image style={styles.image} source={require('../../assets/nopicture.png')} accessible={true} accessibilityLabel="Blank Image" accessibilityRole="image" />)}
               <TouchableOpacity style={styles.button} onPress={() => addImage("front")} accessible={true} accessibilityLabel="Add Front of Vaccination Card Image" accessibilityRole="button">
                 <Text style={styles.buttonText}>Add Front of Card Image</Text>
               </TouchableOpacity>
@@ -105,7 +105,7 @@ const HomeScreen = () => {
             {/* back of card*/}
             <View style={styles.view}>
               <Text style={styles.text} accessibilityRole="header" accessibilityLabel="Back">Back</Text>
-              {backImage ? (<Image style={styles.image} source={{ uri: backImage }} accessible={true} accessibilityLabel="Back of vaccination card" accessibilityRole="image" />) : (<Image style={styles.image} source={require('../assets/nopicture.png')} accessible={true} accessibilityLabel="Blank Image" accessibilityRole="image" />)}
+              {backImage ? (<Image style={styles.image} source={{ uri: backImage }} accessible={true} accessibilityLabel="Back of vaccination card" accessibilityRole="image" />) : (<Image style={styles.image} source={require('../../assets/nopicture.png')} accessible={true} accessibilityLabel="Blank Image" accessibilityRole="image" />)}
               <TouchableOpacity style={styles.button} onPress={() => addImage("back")} accessible={true} accessibilityLabel="Add Back of Vaccination Card Image" accessibilityRole="button">
                 <Text style={styles.buttonText}>Add Back of Card Image</Text>
               </TouchableOpacity>
