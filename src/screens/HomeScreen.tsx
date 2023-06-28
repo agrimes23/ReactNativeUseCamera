@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   View,
@@ -27,7 +27,7 @@ const HomeScreen = () => {
       try {
         const options: CameraOptions = {
           mediaType: 'photo',
-          includeBase64: false, // might need to set it to true to save image to backend?
+          includeBase64: false, // might need to set it to true to save image to backend? Multer Middleware seems to be popular for ppl who use rn-image-picker
           saveToPhotos: true, // only saves photos to user's phone gallery
         };
         setOpenModal(false)
@@ -78,7 +78,7 @@ const HomeScreen = () => {
     return (
         <View>
             <View className="w-screen items-center">
-              <Text className="text-3xl text-black m-5" accessibilityRole="header" accessibilityLabel="Title: Vaccination Card Page. You can add vaccination card from your phone's photo gallery, or take a picture with your camera and submit" >Vaccination Card Page</Text>           
+              <Text className="text-3xl text-black m-5" accessibilityRole="header" accessibilityLabel="Title: Vaccination Card Page. Add vaccination card from your phone's photo gallery, or take a picture with your camera and submit" >Vaccination Card Page</Text>           
             </View>
 
             {/* click to take pic of front & back */}
@@ -123,7 +123,7 @@ const HomeScreen = () => {
                   <Text className="mt-3 text-xl text-center text-black">Use Camera</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => getImageFromLibrary()} accessible={true} accessibilityLabel="Select Image from Phone Album" accessibilityRole="menuitem">
-                  <Text className="mt-3 text-xl text-center text-black">Select Image from Phone Album</Text>
+                  <Text className="mt-3 text-xl text-center text-black">Select Image from Phone Gallery</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setOpenModal(false)} accessible={true} accessibilityLabel="Back to Vaccination Card Page" accessibilityRole="menuitem">
                   <Text className="mt-3 text-xl text-center text-red-500">Back</Text>

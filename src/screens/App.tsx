@@ -10,7 +10,7 @@ import {
   Image
 } from 'react-native';
 import ImagePicker, { launchCamera, CameraOptions, launchImageLibrary, ImageLibraryOptions } from 'react-native-image-picker';
-import HomeScreen from './src/screens/HomeScreen';
+import HomeScreen from './HomeScreen';
 
 // Resources used:
 // // https://github.com/react-native-image-picker/react-native-image-picker#the-response-object
