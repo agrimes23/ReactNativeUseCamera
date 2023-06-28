@@ -10,10 +10,6 @@ import ImagePicker, { launchCamera, CameraOptions, launchImageLibrary, ImageLibr
 
 // documentation used: https://github.com/react-native-image-picker/react-native-image-picker
 
-// TODO: 
-// // Make elements ADA accessible, using accessible={true}, accessibilityLabel={label}, accessibilityTraits={"button"} <- Touchable Opacity, accessibilityRole={"image"}, label on buttons
-// // Upgrade css stylesheet to NativeWind CSS
-
 const HomeScreen = () => {
 
   // for front and back camera image feature:
