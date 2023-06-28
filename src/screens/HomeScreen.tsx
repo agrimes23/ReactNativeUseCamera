@@ -77,10 +77,18 @@ const HomeScreen = () => {
     }
 
 
+    // text: {
+    //   display: 'flex',
+    //   fontSize: 30,
+    //   textAlign: 'center',
+    //   marginTop: 25,
+    //   color: '#000000',
+    // },
+
     return (
         <View>
             <View style={styles.view}>
-              <Text style={styles.text} accessibilityRole="header" accessibilityLabel="Title: Vaccination Card Page. You can add vaccination card from your phone's photo gallery, or take a picture with your camera and submit" >Vaccination Card Page</Text>           
+              <Text className="text-red-700" accessibilityRole="header" accessibilityLabel="Title: Vaccination Card Page. You can add vaccination card from your phone's photo gallery, or take a picture with your camera and submit" >Vaccination Card Page</Text>           
             </View>
 
             {/* click to take pic of front & back */}
