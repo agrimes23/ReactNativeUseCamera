@@ -74,7 +74,7 @@ const HomeScreen = () => {
     return (
         <View>
             <View className="w-screen items-center">
-              <Text className="text-3xl text-black m-5" accessibilityRole="header" accessibilityLabel="Title: Vaccination Card Page. Add vaccination card from your phone's photo gallery, or take a picture with your camera and submit" >Vaccination Card Page</Text>           
+              <Text className="text-3xl text-black m-5" accessibilityRole="header" accessibilityLabel="Title: Vaccination Card Page. Add vaccination card from your phone's photo gallery, or take a picture with your camera and submit" >Insurance Card Page</Text>           
             </View>
 
             {/* click to take pic of front & back */}
